@@ -1,0 +1,58 @@
+.form-inp{
+  padding: 5px;
+  width:30%;
+  margin:5px;
+}
+.btn{
+  border-radius: 5px;
+  padding:5px;
+  width:10%;
+  cursor: pointer;
+}
+.register , .login {
+  color: var(--primary-color);
+  text-align: center;
+  width:33%;
+  margin: 12rem auto;
+  }
+  .clear {
+   position: absolute;
+   display: inline;
+   color:var(--primary-color);
+   background: rgb(189, 187, 187);
+   bottom:0;
+   right: 0;
+  }
+  .question {
+    color: #333;
+    margin: 1.5rem 0
+  }
+  .question a {
+    color: var(--primary-color);
+      }
+  .danger {
+    background-color: rgb(207, 58, 58);
+    width: 30%;
+    margin-bottom: 0.3rem;
+    margin-top:0rem;
+    text-transform: capitalize;
+    padding:0.5rem;
+    cursor:initial;
+    border:none;
+    color:#fff;
+    font:inherit
+    
+    }
+  .danger span {
+    float: right;
+    cursor: pointer;
+  }
+  .red{
+    background: rgb(248, 139, 139)
+  }
+  .green{
+    background: rgb(128, 206, 128)
+  }
+  .seaGreen{
+    background: rgb(107, 161, 197)
+  }
