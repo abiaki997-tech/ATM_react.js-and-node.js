@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-require('dotenv').config()
+
 
 const AccountSchema = new mongoose.Schema({
 
@@ -11,7 +11,7 @@ money: {
     type: String,
     required: true
 },
-owner:{
+Owner:{
   type:mongoose.Schema.Types.ObjectId,
   required: true,
   ref:'User'

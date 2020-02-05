@@ -5,6 +5,8 @@ import {
   WITHDRAW_FAIL,
   GETBALANCE_FAIL,
   GETBALANCE_SUCCESS,
+  PINCHANGE_SUCCESS,
+  PINCHANGE_FAIL,
   CLEAR_ERRORS
 } from '../types'
 
@@ -42,10 +44,24 @@ export default (state, { type, payload }) => {
     case GETBALANCE_FAIL : return {
       ...payload
     }
+    case PINCHANGE_SUCCESS:
+      return{
+           ...state,
+           error:null,
+           ispinchange:true
+      }
+    case PINCHANGE_FAIL : 
+    console.log(payload)
+    return {
+      ...payload
+      
+    }
+
     case CLEAR_ERRORS:
       return {
         ...state,
-        error: null
+        error: null,
+        isbalcheck:null
       }
     default:
       return state

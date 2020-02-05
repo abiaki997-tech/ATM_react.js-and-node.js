@@ -33,7 +33,7 @@ const AccState = (props) =>{
       'Content-Type': 'application/json'
     }
     try {
-      const res = await axios.post('/account/deposit',money , config)
+      const res = await axios.post('/account/deposit/create',money , config)
       dispatch({
         type:DEPOSIT_SUCCESS,
         payload: res.data
@@ -41,7 +41,7 @@ const AccState = (props) =>{
     } catch (err) {
       dispatch({
         type: DEPOSIT_FAIL,
-        payload: err.response.data.msg
+        payload: err.response.data
       })
     }
   }
@@ -59,17 +59,17 @@ const AccState = (props) =>{
     } catch (err) {
       dispatch({
         type: WITHDRAW_FAIL,
-        payload: err.response.data.msg
+        payload: err.response.data
       })
     }
   }
   const balancecheck = async () => {
     try {
-      const res = await axios.get('/account/balacheck')
-      const data=res.data
+      const res = await axios.get('/account/balancecheck')
+      
       dispatch({
         type:GETBALANCE_SUCCESS,
-        payload:data
+        payload:res.data.msg[0]
       })
     } catch (err) {
       dispatch({
@@ -87,7 +87,7 @@ const AccState = (props) =>{
       const res = await axios.post('/account/pinChange',data,config)
       dispatch({
         type:PINCHANGE_SUCCESS,
-        payload:res.data
+        payload:res.data.msg
       })
     } catch (err) {
       dispatch({
@@ -113,6 +113,7 @@ const AccState = (props) =>{
       balancecheck,
       clearErrors,
       pinChange,
+ 
 
 
     }} >

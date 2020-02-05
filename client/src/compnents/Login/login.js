@@ -7,16 +7,14 @@ import {withRouter} from "react-router-dom";
 function Login(props){
   const { login, isAuthencated, error, clearErrors } = useContext(AuthContext)
 
- console.log(error)
- if(error){
-  console.log(error[0].msg)
- }
-// console.log(errors)
-// 
+//  console.log(error)
+//  if(error){
+//   console.log(error[0].msg)
+//  }
+
   useEffect(() => {
     if (isAuthencated) {
     props.history.push('/container')
-      clearErrors()
     } 
   }, [isAuthencated, props.history])
 
@@ -44,9 +42,10 @@ function Login(props){
       cardNumber,
       pinNumber
     })
+   
     clearErrors()
   }
-  console.log(error)
+
   return(
      <div>
        <h1>Welcome! Enter Card Details</h1>
@@ -58,7 +57,6 @@ function Login(props){
                     value={cardNumber}
                     onChange={onchange} 
                     type="string"  
-                    // pattern="\d{10}"
                     required />
          </div>
          <div>
@@ -68,7 +66,6 @@ function Login(props){
                     value={pinNumber}
                     onChange={onchange} 
                     type="string" 
-                    // pattern="\d{4}" 
                     required/>
          </div>
          <div>
@@ -78,12 +75,13 @@ function Login(props){
          </div>
     </form>
 
+{/* error message */}
             <div className="question">
                 {error !== null && 
                   <button className="danger" type="button"  >{error[0].msg} 
                       <span onClick={() => clearErrors()}>X</span>
                   </button>}
-          </div>
+            </div>
 
      </div>
   )

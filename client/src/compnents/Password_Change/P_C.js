@@ -10,20 +10,21 @@ function Password(props){
    
    useEffect(() => {
      if (ispinchange) {
-     props.history.push('/container')
+     props.history.push('/')
        clearErrors()
      } 
    }, [ispinchange, props.history])
  
+  
  
  
    const [User,setUser] = useState({
      cardNumber:'',
-     newPin:''
+     pinNumber:''
    })
    
    
-   const {cardNumber,newPin}=User
+   const {cardNumber,pinNumber}=User
    
    const onchange = e => {
      setUser({
@@ -37,11 +38,11 @@ function Password(props){
      e.preventDefault()
      pinChange({
        cardNumber,
-       newPin
+       pinNumber
      })
      clearErrors()
    }
-   console.log(error)
+
 
   return(
     <div>
@@ -57,10 +58,10 @@ function Password(props){
                  type="string"  required />
       </div>
       <div>
-         <input  name="newpin"
+         <input  name="pinNumber"
                  className="form-inp" 
                  placeholder="Enter new Pin" 
-                 value={newPin}
+                 value={pinNumber}
                  onChange={onchange} 
                  type="string" 
                  required/>
@@ -70,7 +71,16 @@ function Password(props){
                  value="Submit" 
                  className="btn" />
       </div>
+
     </form>
+
+      <div className="question">
+             {error !== null && 
+              <button className="danger" type="button">{error[0]} 
+                  <span onClick={() => clearErrors()}>X</span>
+               </button>}
+       </div>
+      
   </div>
   )
 }

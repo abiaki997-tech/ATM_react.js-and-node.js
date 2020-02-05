@@ -15,40 +15,59 @@ router.post('/',
 
   ],
   async (req, res) => {
+
     const errors = validationResult(req)
-    console.error(errors.array() )
+
+    // console.error(errors.array() )
+
     if (!errors.isEmpty()) {
       return res.status(400).send({ error: errors.array() })
       
     }
     
-
-      // if no, create the user in the db
+      // console.log(req.body)
+      
      
     const {cardNumber,pinNumber} = req.body
 
-    try {
+try {
       // user already exits ?
       let user = await User.findOne({ cardNumber })
-      console.log(user)
+
+      // console.log(user)
+
       if (user) {
-        return res.status(400).json({ error: [{ msg: 'one time login  and type another cardNumber!' }] })
+        //existing user
+        try{
+     
+          const existinguser=await User.findByCredtinals(user,{pinNumber})
+          // console.log(user)
+          //token return (specific user above)
+          const token=await existinguser.generateAuthToken()
+          return  res.send({existinguser,token})//return properties
       }
-   user = new User({
-       cardNumber,
-       pinNumber
-      })
+      catch(e){
+            return res.status(400).send({error:[{msg:"Unable to login"}]})
+       }
+        
+      }
+      //create new user
+      const  newuser = new User({
+            cardNumber,
+            pinNumber
+            })
 
       // password encryption
       //generate token
-      await user.save()
-      const token= await user.generateAuthToken()
-      res.status(201).send({user,token})
+      await newuser.save()
+       const token= await newuser.generateAuthToken()
+       return res.status(201).send({user,token})
      
-    } catch (error) {
-      console.error(error.message)
-      res.status(500).send('server error')
-    }
+    } 
+catch (err) {
+      
+     return res.status(500).send({error:["server error"]})
+}
   })
 
   

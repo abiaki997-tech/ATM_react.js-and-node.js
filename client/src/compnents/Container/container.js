@@ -7,9 +7,11 @@ import './container.css'
 function compnent(){
   return(
  <div className="container">
-   <Deposit/>
-   <Withdraw/>
-   <Balance />
+   
+     <Deposit/>  
+     <Withdraw/>
+     <Balance />
+
  </div>
   )
 }

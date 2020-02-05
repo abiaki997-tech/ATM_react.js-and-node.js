@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, Switch,Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Container from './compnents/Container/container'
 import Home from './compnents/Home/home'
 import Password from './compnents/Password_Change/P_C'

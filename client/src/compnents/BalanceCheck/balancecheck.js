@@ -1,21 +1,14 @@
-import React,{useEffect, useContext} from 'react'
+import React,{useContext} from 'react'
 import AccountContext from '../../context/account/acc_context'
 
 
 function Deposit(){
 
-  const {  balancecheck, balavailable ,error, clearErrors } = useContext(AccountContext)
+  const {balancecheck, balavailable ,isbalcheck,error, clearErrors } = useContext(AccountContext)
  
-  
-  useEffect(() => {
-  balancecheck()
-  }, [])
-
-  const onsubmit = e => {
-    e.preventDefault()
+  const onsubmit = ()=> {
      balancecheck()
   }
-
 
   return(
         <div>
@@ -23,19 +16,23 @@ function Deposit(){
               <input type="submit" 
                     value="BalanceCheck" 
                     className="btn" 
-                    onChange={onsubmit}/>
-               </div>     
-                    
-              <div>
-                <p>{balavailable}</p>
-              </div>         
+                    onClick={onsubmit}/>
+            </div>     
 
-        <div className="question">
+                 {/*Balance show message  */}
+            <div >
+              {isbalcheck === true && <button style={{margin:"10px",width:"20%" ,backgroundColor:"green" , padding:"10px",alignItems:"center"}}>{balavailable}
+                 <span style={{ margin:"10px",color:"red"}} onClick={ ()=>clearErrors()}>X</span>
+              </button>}
+            </div> 
+
+                {/*Error Message */}
+        {/* <div className="question">
             {error !== null && 
-              <button>{error} 
+              <button>{error[0]} 
                   <span onClick={() => clearErrors()}>X</span>
               </button>}
-         </div>        
+         </div>         */}
        
           
         </div>

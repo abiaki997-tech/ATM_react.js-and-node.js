@@ -1,8 +1,8 @@
-
-const mongoose = require('mongoose')
 require('dotenv').config()
+const mongoose = require('mongoose')
 const bcrypt=require('bcryptjs')
 const jwt=require('jsonwebtoken')
+
 
 
 const userSchema = new mongoose.Schema({
@@ -25,10 +25,10 @@ const userSchema = new mongoose.Schema({
   }]
 })
 
-userSchema.virtual('account',{
+userSchema.virtual('Accounts',{
   ref:'Account',
   localField:'_id',
-  foreignField:'owner'
+  foreignField:'Owner'
 })
 
 
@@ -44,12 +44,28 @@ userSchema.methods.generateAuthToken = async function () {
   return token
 }
 
+// check existing user password
+userSchema.statics.findByCredtinals=async(user,{pinNumber})=>{
+  //find user
+  const existinguser=user
 
-// // Hash the plain text password before saving
+  const passwordcheck = await bcrypt.compare(pinNumber,existinguser.pinNumber)
+
+  if(!passwordcheck){
+    throw new Error('Unable to login')
+  }
+
+  return existinguser
+}
+
+
+ // Hash the plain text password before saving
 userSchema.pre('save', async function (next) {
+
   const user = this
-  
-  if(user.isModified('pinNumber')){ //password hashed once
+
+  if(user.isModified('pinNumber')) //password hashed once
+  { 
     user.pinNumber= await bcrypt.hash(user.pinNumber,8)
   }
   next()

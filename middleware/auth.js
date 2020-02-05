@@ -17,14 +17,14 @@ const auth= async (req,res,next)=>{
         throw new Error()
     }
 
-console.log(user)
+// console.log(user)
     req.token=token //send token to req.token
     req.user=user  // send user for route handlers
     next()
   }
   catch(err){
-    console.error(err.message)
-    res.status(401).send(err)
+    // console.error(err.message)
+    res.status(406).send({error:["Unable to login"]})
   }
   
   

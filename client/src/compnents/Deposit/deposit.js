@@ -1,7 +1,7 @@
 import React,{useState,useEffect, useContext} from 'react'
 import './deposit.css'
 import AccountContext from '../../context/account/acc_context'
-// import {withRouter} from "react-router-dom";
+
 
 function Deposit(){
 
@@ -52,12 +52,13 @@ function Deposit(){
                     className="btn" />
           </form>
 
-          <div className="question">
+          {/* <div className="question">
              {error !== null && 
-              <button className="danger" type="button">{error} 
+              <button className="danger" type="button">{error[0]} 
                   <span onClick={() => clearErrors()}>X</span>
                </button>}
-            </div>  
+          </div> */}
+
         </div>
   )
 }

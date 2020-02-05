@@ -6,9 +6,10 @@ function Home (){
   return(
 <div>
   <Login/>
-  <Link to="/password">
-   <p>Forget Pin</p>
-  </Link>
+
+      <Link to="/password">
+         <p>Forget Pin</p>
+      </Link>
 </div>
   )
 }
